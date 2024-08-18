@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.Response;
 import com.example.demo.dao.Student;
 import com.example.demo.dto.StudentDto;
 import com.example.demo.service.StudentService;
@@ -15,7 +16,7 @@ public class StudentController {
     private StudentService studentService;
 
     @GetMapping("/student/{id}")
-    public StudentDto getStudentById(@PathVariable Long id) {
-        return studentService.getStudentById(id);
+    public Response<StudentDto> getStudentById(@PathVariable Long id) {
+        return Response.newSuccess(studentService.getStudentById(id));
     }
 }
