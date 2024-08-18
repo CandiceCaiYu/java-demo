@@ -7,6 +7,9 @@ import com.example.demo.dao.StudentRepository;
 import com.example.demo.dto.StudentDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
+
+import java.util.List;
 
 @Service
 public class StudentServiceImpl implements StudentService{
@@ -18,5 +21,15 @@ public class StudentServiceImpl implements StudentService{
     public StudentDto getStudentById(Long id) {
         Student student = studentRepository.findById(id).orElseThrow(RuntimeException::new);
         return StudentConverter.convertStudent(student);
+    }
+
+    @Override
+    public Long addStudent(StudentDto studentDto) {
+        List<Student> existStudent = studentRepository.findByEmail(studentDto.getEmail());
+        if(!CollectionUtils.isEmpty(existStudent)) {
+            throw new IllegalStateException("email"+studentDto.getEmail()+" has been token");
+        }
+        Student student =  studentRepository.save(StudentConverter.convertStudentDto(studentDto));
+        return student.getId();
     }
 }

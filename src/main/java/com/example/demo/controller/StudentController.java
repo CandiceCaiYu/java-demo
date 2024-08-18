@@ -5,9 +5,7 @@ import com.example.demo.dao.Student;
 import com.example.demo.dto.StudentDto;
 import com.example.demo.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class StudentController {
@@ -18,5 +16,10 @@ public class StudentController {
     @GetMapping("/student/{id}")
     public Response<StudentDto> getStudentById(@PathVariable Long id) {
         return Response.newSuccess(studentService.getStudentById(id));
+    }
+
+    @PostMapping("/student")
+    public Response<Long> addStudent(@RequestBody StudentDto studentDto) {
+        return Response.newSuccess(studentService.addStudent(studentDto));
     }
 }

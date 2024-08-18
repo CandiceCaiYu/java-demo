@@ -5,4 +5,6 @@ import com.example.demo.dto.StudentDto;
 
 public interface StudentService {
     StudentDto getStudentById(Long id);
+
+    public Long addStudent(StudentDto studentDto);
 }
