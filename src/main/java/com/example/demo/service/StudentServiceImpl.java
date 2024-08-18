@@ -32,4 +32,11 @@ public class StudentServiceImpl implements StudentService{
         Student student =  studentRepository.save(StudentConverter.convertStudentDto(studentDto));
         return student.getId();
     }
+
+    @Override
+    public void deleteStudentById(Long id) {
+       studentRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("id: "+ id +" doesn't not exist"));
+       studentRepository.deleteById(id);
+    }
+
 }

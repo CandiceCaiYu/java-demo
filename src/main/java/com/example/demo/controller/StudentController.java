@@ -22,4 +22,10 @@ public class StudentController {
     public Response<Long> addStudent(@RequestBody StudentDto studentDto) {
         return Response.newSuccess(studentService.addStudent(studentDto));
     }
+
+    @DeleteMapping("/student/{id}")
+    public Void deleteStudent(@PathVariable Long id) {
+        studentService.deleteStudentById(id);
+        return null;
+    }
 }

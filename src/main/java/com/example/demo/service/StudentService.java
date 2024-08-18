@@ -7,4 +7,6 @@ public interface StudentService {
     StudentDto getStudentById(Long id);
 
     public Long addStudent(StudentDto studentDto);
+
+    public void deleteStudentById(Long id);
 }
